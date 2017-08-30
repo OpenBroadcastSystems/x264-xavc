@@ -177,6 +177,7 @@ void x264_param_default( x264_param_t *param )
     param->i_opencl_device = 0;
     param->opencl_device_id = NULL;
     param->psz_clbin_file = NULL;
+    param->i_avcintra_class = 0;
 }
 
 static int x264_param_apply_preset( x264_param_t *param, const char *preset )
@@ -677,7 +678,14 @@ int x264_param_parse( x264_param_t *p, const char *name, const char *value )
     OPT("bluray-compat")
         p->b_bluray_compat = atobool(value);
     OPT("avcintra-class")
-        p->i_avcintra_class = atoi(value);
+        p->i_avcintra_class |= atoi(value);
+    OPT("avcintra-flavour")
+    {
+        if( !strcasecmp(value, "sony") )
+            p->i_avcintra_class |= X264_AVC_INTRA_FLAVOUR_SONY;
+        else if( !strcasecmp(value, "panasonic") )
+            p->i_avcintra_class &= X264_AVC_INTRA_FLAVOUR_MASK;
+    }
     OPT("sar")
     {
         b_error = ( 2 != sscanf( value, "%d:%d", &p->vui.i_sar_width, &p->vui.i_sar_height ) &&
