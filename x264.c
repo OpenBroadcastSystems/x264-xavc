@@ -852,7 +852,7 @@ static void help( x264_param_t *defaults, int longhelp )
         "                                  - undef, bt709, bt470m, bt470bg, smpte170m,\n"
         "                                    smpte240m, linear, log100, log316,\n"
         "                                    iec61966-2-4, bt1361e, iec61966-2-1,\n"
-        "                                    bt2020-10, bt2020-12, smpte2084, smpte428\n",
+        "                                    bt2020-10, bt2020-12, smpte2084, smpte428, hlg\n",
                                        strtable_lookup( x264_transfer_names, defaults->vui.i_transfer ) );
     H2( "      --colormatrix <string>  Specify color matrix setting [\"%s\"]\n"
         "                                  - undef, bt709, fcc, bt470bg, smpte170m,\n"
